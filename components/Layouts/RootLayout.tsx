@@ -4,12 +4,12 @@ import Navbar from "../UI/Navbar/Navbar";
 
 const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="min-h-screen w-full flex flex-col">
+    <div className="">
       {/* navbar */}
       <div>
         <Navbar />
       </div>
-      <div className="flex-grow">{children}</div>
+      <div className="h-screen">{children}</div>
 
       {/* footer */}
       <div className="mt-auto ">

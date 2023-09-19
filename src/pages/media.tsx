@@ -3,7 +3,7 @@ import RootLayout from "../../components/Layouts/RootLayout";
 
 const media = () => {
   return (
-    <div className="mt-20">
+    <div className="mt-">
       <h1>This is media page</h1>
     </div>
   );
