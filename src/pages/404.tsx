@@ -22,7 +22,7 @@ const ErrorPage = () => {
         <div className="font-semibold text-2xl py-2 text-center">
           Ooops!!! The page is not found
         </div>
-        <Link href="/" className="back-home flex justify-center">
+        <Link href="/" className="back-home flex justify-center mt-2">
           <Button>Back To Home</Button>
         </Link>
       </div>
