@@ -7,7 +7,7 @@ const Footer = () => {
     return new Date().getFullYear();
   };
   return (
-    <div className=" bg-gray-900 rounded-tl-[150px]">
+    <div className=" bg-gray-900 md:rounded-tl-[150px]">
       <div className="max-w-2xl mx-auto text-white py-10">
         <div className="text-center">
           <h3 className="text-3xl mb-3"> Download our SocialInk app </h3>
