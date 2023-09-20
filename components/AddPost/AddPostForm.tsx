@@ -116,13 +116,13 @@ const AddPostForm = () => {
   });
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center bg-box-pattern">
       <form
         onSubmit={formSubmitHandler}
         className={`my-4  md:mx-0 flex max-w-lg rounded-xl w-full flex-col gap-4 bg-[#FFFFFF] px-7 md:px-14 py-6`}
       >
-        <h1 className="text-primary font-anton text-[20px] md:text-[30px] font-normal leading-[30px] md:leading-[50px] letter-spacing text-center">
-          Add new Media
+        <h1 className="text-primary font-anton text-[20px] md:text-[30px] font-normal leading-[30px] md:leading-[50px] letter-spacing text-center uppercase">
+          Share your thoughts
         </h1>
         <div className="space-y-6 block relative">
           {/* Title */}

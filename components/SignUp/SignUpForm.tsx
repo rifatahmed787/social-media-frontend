@@ -9,6 +9,7 @@ import { useUploderMutation } from "@/redux/features/upload/uploadApi";
 import { useRegisterMutation } from "@/redux/features/auth/authApi";
 import FileInputtwo from "../UI/Form_items/FileInputtwo";
 import { useRouter } from "next/router";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 const SignUpForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -73,9 +74,6 @@ const SignUpForm = () => {
     });
 
     setIsLoading(false);
-    if (isSuccess) {
-      router.push("/");
-    }
   };
 
   // Input handler
@@ -97,8 +95,9 @@ const SignUpForm = () => {
       setIsAlertOpen(true);
       setAlertType("success");
       setAlertMessages("Signed up successfully");
+      router.push("/");
     }
-  }, [error, isError, isSuccess]);
+  }, [error, isError, isSuccess, router]);
 
   return (
     <div
@@ -198,9 +197,22 @@ const SignUpForm = () => {
           icon={isLoading ? ICONS.button_loading_icon : undefined}
           isDisabled={isLoading}
         />
+        <button
+          onClick={() =>
+            signIn("google", {
+              callbackUrl: "http://localhost:3000/",
+            })
+          }
+          aria-label="Login with Google"
+          type="button"
+          className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ri focus:ri dark:border-gray-400 focus:ri"
+        >
+          {ICONS.google}
+          <p>Login with Google</p>
+        </button>
 
         <div>
-          <p className={`font-inter text-base text-[#000] text-center `}>
+          <p className={`font-inter text-base text-[#000] text-center mb-2`}>
             Already have account?
             <Link href="/signin">
               <span className="ml-2  underline">Login</span>

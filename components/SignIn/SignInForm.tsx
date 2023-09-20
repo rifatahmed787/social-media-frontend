@@ -31,9 +31,6 @@ const SignInForm = () => {
   const formSubmitHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
     login({ data: sign_in_form });
-    if (isSuccess) {
-      router.push("/");
-    }
   };
 
   // Input handler
@@ -55,8 +52,9 @@ const SignInForm = () => {
       setIsAlertOpen(true);
       setAlertType("success");
       setAlertMessages("Logged in successfully");
+      router.push("/");
     }
-  }, [error, isError, isSuccess]);
+  }, [error, isError, isSuccess, router]);
 
   return (
     <div
