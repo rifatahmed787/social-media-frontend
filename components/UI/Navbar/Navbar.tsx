@@ -4,9 +4,12 @@ import logo from "../../../src/assets/socialink-color.svg";
 import React from "react";
 import Image from "next/image";
 import Button from "../Button";
+import { useAppSelector } from "@/hooks/reduxHook";
+import Account from "./Account";
 
 const Navbar = () => {
   const router = useRouter();
+  const { isLoggedIn } = useAppSelector((state) => state.auth);
   return (
     <div>
       <nav className="bg-white  sticky w-full z-20 top-0 left-0 border-b border-gray-200">
@@ -16,13 +19,19 @@ const Navbar = () => {
           </Link>
 
           <div className="flex md:order-2">
-            <Link href={"/signup"}>
-              <Button
-                title="Get started"
-                className="border border-black text-primary hover:bg-primary hover:border-primary hover:text-white duration-300 px-3  py-2 "
-                icon=""
-              />
-            </Link>
+            {isLoggedIn ? (
+              <>
+                <ul className=" items-center hidden lg:flex">{<Account />}</ul>
+              </>
+            ) : (
+              <Link href={"/signup"}>
+                <Button
+                  title="Get started"
+                  className="border border-black text-primary hover:bg-primary hover:border-primary hover:text-white duration-300 px-3  py-2 "
+                  icon=""
+                />
+              </Link>
+            )}
             <button
               data-collapse-toggle="navbar-sticky"
               type="button"

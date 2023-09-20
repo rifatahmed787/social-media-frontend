@@ -8,12 +8,13 @@ import ToastContainer from "../UI/Toast";
 import { useUploderMutation } from "@/redux/features/upload/uploadApi";
 import { useRegisterMutation } from "@/redux/features/auth/authApi";
 import FileInputtwo from "../UI/Form_items/FileInputtwo";
+import { useRouter } from "next/router";
 
 const SignUpForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   // signup mutation hook
   const [register, { isError, error, isSuccess }] = useRegisterMutation();
-
+  const router = useRouter();
   const [uploader] = useUploderMutation();
 
   // Alert State
@@ -70,7 +71,11 @@ const SignUpForm = () => {
         imageUrl,
       },
     });
+
     setIsLoading(false);
+    if (isSuccess) {
+      router.push("/");
+    }
   };
 
   // Input handler
