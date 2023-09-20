@@ -1,7 +1,7 @@
-import { InputType } from "@/Types/input";
+import { InputType } from "@/Types/Input";
 import { cn } from "@/lib/utils";
 
-import { useContext, useState } from "react";
+import { useState } from "react";
 
 type ITextInput = {
   label?: string;

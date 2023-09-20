@@ -10,6 +10,12 @@ module.exports = {
 
   theme: {
     extend: {
+      backgroundImage: {
+        "box-pattern": "url('@/assets/loginPattern.svg')",
+        "gradient-backdrop":
+          "linear-gradient(to top right, #36393C, #141727, #141727, #141727, #141727, #141727)",
+        "image-gradient": "bg-gradient-to-b from-yellow-400 to-green-400",
+      },
       colors: {
         primary: "#0000FF",
         secondary: "#387CE5",

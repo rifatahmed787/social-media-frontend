@@ -16,11 +16,13 @@ const Navbar = () => {
           </Link>
 
           <div className="flex md:order-2">
-            <Button
-              title="Get started"
-              className="border border-black text-primary hover:bg-primary hover:border-primary hover:text-white duration-300 px-3  py-2 "
-              icon=""
-            />
+            <Link href={"/signup"}>
+              <Button
+                title="Get started"
+                className="border border-black text-primary hover:bg-primary hover:border-primary hover:text-white duration-300 px-3  py-2 "
+                icon=""
+              />
+            </Link>
             <button
               data-collapse-toggle="navbar-sticky"
               type="button"

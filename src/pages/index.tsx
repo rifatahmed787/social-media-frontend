@@ -6,7 +6,6 @@ import AddPostForm from "../../components/AddPost/AddPostForm";
 const HomePage: NextPageWithLayout = () => {
   return (
     <div className="">
-      <h1 className="text-5xl">Home page</h1>
       <AddPostForm />
     </div>
   );

@@ -123,64 +123,63 @@ const AddPostForm = () => {
   //   });
 
   return (
-    <form
-      onSubmit={formSubmitHandler}
-      className={`my-4 mx-5 md:mx-0 flex max-w-lg rounded-xl w-full flex-col gap-4 bg-[#FFFFFF] px-7 md:px-14 py-6`}
-    >
-      <h1
-        className="text-primary font-anton text-[20px] md:text-[30px] font-normal 
-                      leading-[30px] md:leading-[50px] letter-spacing text-center"
+    <div className="flex justify-center">
+      <form
+        onSubmit={formSubmitHandler}
+        className={`my-4  md:mx-0 flex max-w-lg rounded-xl w-full flex-col gap-4 bg-[#FFFFFF] px-7 md:px-14 py-6`}
       >
-        Add new book
-      </h1>
-      <div className="space-y-6 block relative">
-        {/* Title */}
+        <h1 className="text-primary font-anton text-[20px] md:text-[30px] font-normal leading-[30px] md:leading-[50px] letter-spacing text-center">
+          Add new book
+        </h1>
+        <div className="space-y-6 block relative">
+          {/* Title */}
 
-        {/* Description */}
-        <TextArea
-          placeHolder="Description"
-          currentValue={book_form.description}
-          onChange={(e) => inputChangeHandler(e, "description")}
-          required={true}
-        />
+          {/* Description */}
+          <TextArea
+            placeHolder="W"
+            currentValue={book_form.description}
+            onChange={(e) => inputChangeHandler(e, "description")}
+            required={true}
+          />
 
-        {/* Cover Image */}
-        <FileInput
-          label=""
-          onChange={(selectedFile) => {
-            console.log("Selected file:", selectedFile);
-            setFile(selectedFile);
-          }}
-          currentFile={file}
-          placeholder="Choose an image"
-          required
-          id="image"
-          htmlFor="image"
-          currentValue={""}
-        />
-      </div>
+          {/* Cover Image */}
+          <FileInput
+            label=""
+            onChange={(selectedFile) => {
+              console.log("Selected file:", selectedFile);
+              setFile(selectedFile);
+            }}
+            currentFile={file}
+            placeholder="Choose an image"
+            required
+            id="image"
+            htmlFor="image"
+            currentValue={""}
+          />
+        </div>
 
-      {/* Submit button */}
-      <Button
-        type="submit"
-        title="Submit"
-        className="bg-primary w-full mx-auto py-[17px] md:py-[10px] px-10 md:px-14 
+        {/* Submit button */}
+        <Button
+          type="submit"
+          title="Submit"
+          className="bg-primary w-full mx-auto py-[17px] md:py-[10px] px-10 md:px-14 
           text-base font-medium rounded"
-        icon={isLoading && ICONS.button_loading_icon}
-        isDisabled={isLoading}
-      />
-
-      {/* Toast */}
-      {isAlertOpen && (
-        <ToastContainer
-          type={AlertType}
-          messages={AlertMessages}
-          isAlertOpen={isAlertOpen}
-          setIsAlertOpen={setIsAlertOpen}
-          className="max-w-xs w-full absolute top-0 right-0 flex justify-center z-50"
+          icon={isLoading && ICONS.button_loading_icon}
+          isDisabled={isLoading}
         />
-      )}
-    </form>
+
+        {/* Toast */}
+        {isAlertOpen && (
+          <ToastContainer
+            type={AlertType}
+            messages={AlertMessages}
+            isAlertOpen={isAlertOpen}
+            setIsAlertOpen={setIsAlertOpen}
+            className="max-w-xs w-full absolute top-0 right-0 flex justify-center z-50"
+          />
+        )}
+      </form>
+    </div>
   );
 };
 
