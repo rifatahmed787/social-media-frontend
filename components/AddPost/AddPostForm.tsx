@@ -9,16 +9,19 @@ import ToastContainer from "../UI/Toast";
 import { useAddMediaMutation } from "@/redux/features/media/mediaApi";
 import { useUploderMutation } from "@/redux/features/upload/uploadApi";
 import { get_error_messages } from "@/lib/error_message";
+import { useAppSelector } from "@/hooks/reduxHook";
 
 const AddPostForm = () => {
   // user details
   const { user } = useAppSelector((state) => state.auth);
   const [isLoading, setIsLoading] = useState(false);
-  // Add book mutation hook
-  const [addMedia, { data: new_book_data, isError, error, isSuccess }] =
+  // Add media mutation hook
+  const [addMedia, { data: new_media_data, isError, error, isSuccess }] =
     useAddMediaMutation();
   const [uploader, { isError: uploadError, error: uploadingError }] =
     useUploderMutation();
+
+  console.log(user);
 
   // Alert State
   const [isAlertOpen, setIsAlertOpen] = useState(false);
@@ -28,7 +31,7 @@ const AddPostForm = () => {
   const [AlertMessages, setAlertMessages] = useState("");
 
   // form state
-  const [book_form, setBookForm] = useState({
+  const [media_form, setMediaForm] = useState({
     image: "",
 
     description: "",
@@ -64,18 +67,18 @@ const AddPostForm = () => {
       }
     }
 
-    const book_data = { ...book_form };
+    const media_data = { ...media_form };
 
-    // the properties of book_data
-    book_data.added_by = user?._id as string;
+    // the properties of media_data
+    media_data.added_by = user?._id as string;
 
     // the cover_image property
-    const book_data_with_cover_image = {
-      ...book_data,
+    const media_data_with_cover_image = {
+      ...media_data,
       image: imageUrl,
     };
-
-    addMedia(book_data_with_cover_image);
+    console.log(media_data_with_cover_image);
+    addMedia(media_data_with_cover_image);
     setIsLoading(false);
   };
 
@@ -86,17 +89,10 @@ const AddPostForm = () => {
       | React.ChangeEvent<HTMLTextAreaElement>,
     key: string
   ) => {
-    if (key == "keynotes") {
-      setBookForm((prev) => ({
-        ...prev,
-        [key]: e.target.value.split(","),
-      }));
-    } else {
-      setBookForm((prev) => ({
-        ...prev,
-        [key]: e.target.value,
-      }));
-    }
+    setMediaForm((prev) => ({
+      ...prev,
+      [key]: e.target.value,
+    }));
   };
 
   // error and success handling
@@ -109,7 +105,7 @@ const AddPostForm = () => {
     } else if (isSuccess) {
       setIsAlertOpen(true);
       setAlertType("success");
-      setAlertMessages(new_book_data?.message);
+      setAlertMessages(new_media_data?.message);
     }
   }, [error, isError, isSuccess]);
   useEffect(() => {
@@ -126,15 +122,15 @@ const AddPostForm = () => {
         className={`my-4  md:mx-0 flex max-w-lg rounded-xl w-full flex-col gap-4 bg-[#FFFFFF] px-7 md:px-14 py-6`}
       >
         <h1 className="text-primary font-anton text-[20px] md:text-[30px] font-normal leading-[30px] md:leading-[50px] letter-spacing text-center">
-          Add new book
+          Add new Media
         </h1>
         <div className="space-y-6 block relative">
           {/* Title */}
 
           {/* Description */}
           <TextArea
-            placeHolder="W"
-            currentValue={book_form.description}
+            placeHolder={`Post your thoughts ${user?.name?.firstName}`}
+            currentValue={media_form.description}
             onChange={(e) => inputChangeHandler(e, "description")}
             required={true}
           />
@@ -181,6 +177,3 @@ const AddPostForm = () => {
 };
 
 export default AddPostForm;
-function useAppSelector(arg0: (state: any) => any): { user: any } {
-  throw new Error("Function not implemented.");
-}

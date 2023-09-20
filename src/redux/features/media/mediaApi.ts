@@ -30,7 +30,7 @@ export const mediaApi = apiSlice.injectEndpoints({
     // Add Media
     addMedia: builder.mutation({
       query: (data: IMedia) => ({
-        url: `/media`,
+        url: `/medias`,
         method: "POST",
         body: data,
       }),
