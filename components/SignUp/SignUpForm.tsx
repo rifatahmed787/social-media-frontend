@@ -200,7 +200,7 @@ const SignUpForm = () => {
         <button
           onClick={() =>
             signIn("google", {
-              callbackUrl: "http://localhost:3000/",
+              callbackUrl: "https://social-media-frontend-mu.vercel.app/",
             })
           }
           aria-label="Login with Google"
