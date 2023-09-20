@@ -15,18 +15,7 @@ export const apiSlice = createApi({
       return headers;
     },
   }),
-  tagTypes: [
-    "filteringItems",
-    "book",
-    "books",
-    "reviews",
-    "latest_books",
-    "wishlist",
-    "reading_list",
-    "best_seller",
-    "cart",
-    "blog",
-  ],
+  tagTypes: ["media", "medias", "top_medias", "reviews", "cart", "blog"],
 
   endpoints: () => ({}),
 });

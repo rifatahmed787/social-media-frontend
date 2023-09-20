@@ -6,22 +6,19 @@ import FileInput from "../UI/Form_items/FileInput";
 import Button from "../UI/Button";
 import ICONS from "@/Shared/AllIcons";
 import ToastContainer from "../UI/Toast";
-
-// import { useAppSelector } from "@/hooks/reduxHook";
-// import { useAddBookMutation } from "@/redux/features/book/bookApi";
-
-// import { useUploderMutation } from "@/redux/features/upload/uploadApi";
-// import { DarkModeContext } from "../DarkModeContext/DarkModeContext";
+import { useAddMediaMutation } from "@/redux/features/media/mediaApi";
+import { useUploderMutation } from "@/redux/features/upload/uploadApi";
+import { get_error_messages } from "@/lib/error_message";
 
 const AddPostForm = () => {
   // user details
-  //   const { user } = useAppSelector((state) => state.auth);
+  const { user } = useAppSelector((state) => state.auth);
   const [isLoading, setIsLoading] = useState(false);
   // Add book mutation hook
-  //   const [addBok, { data: new_book_data, isError, error, isSuccess }] =
-  //     useAddBookMutation();
-  //   const [uploader, { isError: uploadError, error: uploadingError }] =
-  //     useUploderMutation();
+  const [addMedia, { data: new_book_data, isError, error, isSuccess }] =
+    useAddMediaMutation();
+  const [uploader, { isError: uploadError, error: uploadingError }] =
+    useUploderMutation();
 
   // Alert State
   const [isAlertOpen, setIsAlertOpen] = useState(false);
@@ -46,39 +43,39 @@ const AddPostForm = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    // let imageUrl = "";
-    // if (file) {
-    //   // console.log("this is the file data", file);
-    //   const formData = new FormData();
-    //   formData.append("image", file);
+    let imageUrl = "";
+    if (file) {
+      // console.log("this is the file data", file);
+      const formData = new FormData();
+      formData.append("image", file);
 
-    //   try {
-    //     const uploadResponse = await uploader({ data: formData });
-    //     console.log("this is the url data", uploadResponse);
-    //     if (uploadResponse) {
-    //       if ("data" in uploadResponse) {
-    //         imageUrl = uploadResponse.data.images[0];
-    //       } else {
-    //         console.error("Upload error:", uploadResponse.error);
-    //       }
-    //     }
-    //   } catch (error) {
-    //     console.error("Error uploading file:", error);
-    //   }
-    // }
+      try {
+        const uploadResponse = await uploader({ data: formData });
+        console.log("this is the url data", uploadResponse);
+        if (uploadResponse) {
+          if ("data" in uploadResponse) {
+            imageUrl = uploadResponse.data.images[0];
+          } else {
+            console.error("Upload error:", uploadResponse.error);
+          }
+        }
+      } catch (error) {
+        console.error("Error uploading file:", error);
+      }
+    }
 
     const book_data = { ...book_form };
 
     // the properties of book_data
-    // book_data.added_by = user?._id as string;
+    book_data.added_by = user?._id as string;
 
     // the cover_image property
     const book_data_with_cover_image = {
       ...book_data,
-      //   cover_image: imageUrl,
+      image: imageUrl,
     };
 
-    // addBok(book_data_with_cover_image);
+    addMedia(book_data_with_cover_image);
     setIsLoading(false);
   };
 
@@ -103,24 +100,24 @@ const AddPostForm = () => {
   };
 
   // error and success handling
-  //   useEffect(() => {
-  //     if (isError && error && "data" in error) {
-  //       setIsAlertOpen(true);
-  //       setAlertType("error");
-  //       const error_messages = get_error_messages(error);
-  //       setAlertMessages(error_messages);
-  //     } else if (isSuccess) {
-  //       setIsAlertOpen(true);
-  //       setAlertType("success");
-  //       setAlertMessages(new_book_data?.message);
-  //     }
-  //   }, [error, isError, isSuccess]);
-  //   useEffect(() => {
-  //     if (uploadError && uploadingError) {
-  //       setIsAlertOpen(true);
-  //       setAlertType("error");
-  //     }
-  //   });
+  useEffect(() => {
+    if (isError && error && "data" in error) {
+      setIsAlertOpen(true);
+      setAlertType("error");
+      const error_messages = get_error_messages(error);
+      setAlertMessages(error_messages);
+    } else if (isSuccess) {
+      setIsAlertOpen(true);
+      setAlertType("success");
+      setAlertMessages(new_book_data?.message);
+    }
+  }, [error, isError, isSuccess]);
+  useEffect(() => {
+    if (uploadError && uploadingError) {
+      setIsAlertOpen(true);
+      setAlertType("error");
+    }
+  });
 
   return (
     <div className="flex justify-center">
@@ -184,3 +181,6 @@ const AddPostForm = () => {
 };
 
 export default AddPostForm;
+function useAppSelector(arg0: (state: any) => any): { user: any } {
+  throw new Error("Function not implemented.");
+}

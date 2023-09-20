@@ -43,7 +43,7 @@ const TextInput = ({
         htmlFor={id || "input-box"}
         className={`absolute text-sm text-bold text-gray-500 transform transition-all ${
           isFocused || currentValue
-            ? "top-0 scale-75 -translate-y-3"
+            ? "top-0 scale-75 -translate-y-2.5 bg-white"
             : "top-3 scale-100 translate-y-0"
         } left-2 peer-focus:text-brand peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3 peer-focus:absolute peer-focus:z-10 px-2`}
       >

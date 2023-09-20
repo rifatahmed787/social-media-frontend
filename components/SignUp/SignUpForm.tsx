@@ -96,7 +96,9 @@ const SignUpForm = () => {
   }, [error, isError, isSuccess]);
 
   return (
-    <div className={`min-h-screen w-full  flex items-center justify-center `}>
+    <div
+      className={`min-h-screen w-full  flex items-center justify-center bg-box-pattern`}
+    >
       <form
         onSubmit={formSubmitHandler}
         className={`relative flex  max-w-lg rounded-xl w-full  flex-col gap-4 backdrop-blur-3xl bg-white/80 mx-5 px-5 md:px-[74px] py-7"
