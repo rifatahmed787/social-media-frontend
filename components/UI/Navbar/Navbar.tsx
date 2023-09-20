@@ -6,6 +6,7 @@ import Image from "next/image";
 import Button from "../Button";
 import { useAppSelector } from "@/hooks/reduxHook";
 import Account from "./Account";
+import { useSession, signOut } from "next-auth/react";
 
 const Navbar = () => {
   const router = useRouter();
