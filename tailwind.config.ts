@@ -3,7 +3,7 @@
 module.exports = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
+    "./src/components/**/*.{js,ts,jsx,tsx}",
     "./node_modules/flowbite/**/*.tsx",
     "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}",
   ],

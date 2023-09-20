@@ -1,5 +1,5 @@
+import RootLayout from "@/components/Layouts/RootLayout";
 import { ReactElement } from "react";
-import RootLayout from "../../components/Layouts/RootLayout";
 
 const about = () => {
   return (

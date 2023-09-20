@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import logo from "../../../src/assets/socialink-color.svg";
+import logo from "../../../assets/socialink-color.svg";
 import React from "react";
 import Image from "next/image";
 import Button from "../Button";
@@ -11,6 +11,7 @@ import { useSession, signOut } from "next-auth/react";
 const Navbar = () => {
   const router = useRouter();
   const { isLoggedIn } = useAppSelector((state) => state.auth);
+
   return (
     <div>
       <nav className="bg-white  sticky w-full z-20 top-0 left-0 border-b border-gray-200">

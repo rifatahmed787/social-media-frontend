@@ -1,7 +1,8 @@
 import { ReactElement } from "react";
-import RootLayout from "../../components/Layouts/RootLayout";
+
 import { NextPageWithLayout } from "./_app";
-import AddPostForm from "../../components/AddPost/AddPostForm";
+import AddPostForm from "@/components/AddPost/AddPostForm";
+import RootLayout from "@/components/Layouts/RootLayout";
 
 const HomePage: NextPageWithLayout = () => {
   return (

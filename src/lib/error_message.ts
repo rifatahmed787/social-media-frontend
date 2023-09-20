@@ -1,4 +1,4 @@
-import { IErrorData, IErrorMessages, IErrorResponse } from "@/types/Error";
+import { IErrorData, IErrorMessages, IErrorResponse } from "@/Types/Error";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
 
 // just for information, unknown type ignored here

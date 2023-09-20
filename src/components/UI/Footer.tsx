@@ -1,5 +1,5 @@
-import google from "../../src/assets/google.png";
-import apple from "../../src/assets/apple.png";
+import google from "../../assets/google.png";
+import apple from "../../assets/apple.png";
 import Image from "next/image";
 
 const Footer = () => {
