@@ -10,7 +10,7 @@ import ToastContainer from "./Toast";
 import { get_error_messages } from "@/lib/error_message";
 import Button from "./Button";
 
-const MediaCard = ({ media }: { media: IMedia }) => {
+const LatestThreeCard = ({ media }: { media: IMedia }) => {
   const { user } = useAppSelector((state) => state.auth);
   const [likePost, setLikePost] = useState(false);
   const [toggleLikeMedia, { data: like_data, isError, error, isSuccess }] =
@@ -196,15 +196,15 @@ const MediaCard = ({ media }: { media: IMedia }) => {
               className="w-full py-0.5 dark:bg-transparent border-none rounded text-sm pl-0 dark:text-gray-100"
             />
           </div>
-        </div>
-        <div className="mb-3">
-          <Link href={`/media/${media?._id}`}>
-            <Button
-              title="View Details"
-              className="bg-primary w-full mx-auto py-2  px-3  
+          <div className="my-3">
+            <Link href={`/media/${media?._id}`}>
+              <Button
+                title="View Details"
+                className="bg-primary w-full mx-auto py-2  px-3  
           text-base font-medium rounded"
-            />
-          </Link>
+              />
+            </Link>
+          </div>
         </div>
       </div>
       {/* Toast */}
@@ -221,4 +221,4 @@ const MediaCard = ({ media }: { media: IMedia }) => {
   );
 };
 
-export default MediaCard;
+export default LatestThreeCard;

@@ -3,7 +3,7 @@ import { ReactElement } from "react";
 
 const about = () => {
   return (
-    <div className="mt">
+    <div className="mt-20 h-screen">
       <h1 className="text-5xl">This is about seciton</h1>
     </div>
   );

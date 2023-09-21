@@ -12,7 +12,7 @@ export const mediaApi = apiSlice.injectEndpoints({
 
     //Get latest-three
     getLatestMedias: builder.query({
-      query: () => `/medias/top-three`,
+      query: () => `/medias/latest-three`,
       providesTags: ["top_medias"],
     }),
 

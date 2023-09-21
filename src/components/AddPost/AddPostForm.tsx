@@ -10,10 +10,12 @@ import { useAddMediaMutation } from "@/redux/features/media/mediaApi";
 import { useUploderMutation } from "@/redux/features/upload/uploadApi";
 import { get_error_messages } from "@/lib/error_message";
 import { useAppSelector } from "@/hooks/reduxHook";
+import { useRouter } from "next/router";
 
 const AddPostForm = () => {
   // user details
-  const { user } = useAppSelector((state) => state.auth);
+  const { user, isLoggedIn } = useAppSelector((state) => state.auth);
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   // Add media mutation hook
   const [addMedia, { data: new_media_data, isError, error, isSuccess }] =
@@ -121,6 +123,12 @@ const AddPostForm = () => {
       setAlertType("error");
     }
   });
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      router.push("/signup");
+    }
+  }, [isLoggedIn, router]);
 
   return (
     <div className="flex justify-center bg-box-pattern">
