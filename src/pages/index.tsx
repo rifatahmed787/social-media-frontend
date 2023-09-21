@@ -6,7 +6,7 @@ import RootLayout from "@/components/Layouts/RootLayout";
 
 const HomePage: NextPageWithLayout = () => {
   return (
-    <div className="">
+    <div className="mt-20">
       <AddPostForm />
     </div>
   );

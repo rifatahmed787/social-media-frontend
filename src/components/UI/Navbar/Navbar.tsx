@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import logo from "../../../assets/socialink-color.svg";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Button from "../Button";
 import { useAppSelector } from "@/hooks/reduxHook";
@@ -11,10 +11,29 @@ import { useSession, signOut } from "next-auth/react";
 const Navbar = () => {
   const router = useRouter();
   const { isLoggedIn } = useAppSelector((state) => state.auth);
+  const [isNavbarVisible, setIsNavbarVisible] = useState(true);
+
+  const handleScroll = () => {
+    const scrollTop = window.scrollY;
+
+    setIsNavbarVisible(scrollTop < 1000);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const navbarClasses = `fixed top-0 z-20 border-b w-full border-gray-200 transition-transform duration-300 ${
+    isNavbarVisible ? "translate-y-0" : "-translate-y-full"
+  } bg-white shadow-md`;
 
   return (
     <div>
-      <nav className="bg-white  sticky w-full z-20 top-0 left-0 border-b border-gray-200">
+      <nav className={navbarClasses}>
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <Link href="/">
             <Image src={logo} alt="" width={150} />

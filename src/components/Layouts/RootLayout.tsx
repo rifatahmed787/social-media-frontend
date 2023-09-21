@@ -13,7 +13,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
           <Navbar />
         </Provider>
       </div>
-      <div className="h-screen">{children}</div>
+      <div className="overflow-y-auto">{children}</div>
 
       {/* footer */}
       <div className="mt-auto ">

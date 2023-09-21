@@ -1,10 +1,11 @@
 import RootLayout from "@/components/Layouts/RootLayout";
+import Media from "@/components/Media/Media";
 import { ReactElement } from "react";
 
 const media = () => {
   return (
-    <div className="mt-">
-      <h1>This is media page</h1>
+    <div className="">
+      <Media />
     </div>
   );
 };

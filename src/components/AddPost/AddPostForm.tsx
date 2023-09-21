@@ -33,9 +33,12 @@ const AddPostForm = () => {
   // form state
   const [media_form, setMediaForm] = useState({
     image: "",
-
+    owner: "",
     description: "",
+    userImage: "",
     added_by: "",
+    like: [],
+    comments: [],
   });
 
   // file state
@@ -71,6 +74,10 @@ const AddPostForm = () => {
 
     // the properties of media_data
     media_data.added_by = user?._id as string;
+    media_data.userImage = user?.imageUrl as string;
+    media_data.owner = `${user?.name?.firstName || ""} ${
+      user?.name?.lastName || ""
+    }`;
 
     // the cover_image property
     const media_data_with_cover_image = {

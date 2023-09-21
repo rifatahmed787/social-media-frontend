@@ -6,10 +6,7 @@ export const mediaApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     //Get All medias
     getMedias: builder.query({
-      query: (args: Record<string, unknown>) => {
-        const query = args ? ParamSerialization(args) : "";
-        return `/medias?${query}`;
-      },
+      query: () => `/medias`,
       providesTags: ["medias"],
     }),
 
@@ -35,6 +32,53 @@ export const mediaApi = apiSlice.injectEndpoints({
         body: data,
       }),
       invalidatesTags: ["top_medias"],
+    }),
+
+    // Toggle like status
+    toggleLikeMedia: builder.mutation({
+      query: ({ mediaID }) => ({
+        url: `/medias/toggle-like/${mediaID}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["medias", "media"],
+
+      // async onQueryStarted({ mediaID }, { dispatch, queryFulfilled }) {
+      //   try {
+      //     const { data: media_data } = await queryFulfilled;
+
+      //     if (media_data) {
+      //       // Handle the response data if needed.
+      //     }
+
+      //     // Update the query data for the specific media item.
+      //     dispatch(
+      //       mediaApi.util.updateQueryData(
+      //         "getMediaDetails",
+      //         mediaID,
+      //         (draft) => {
+      //           // Toggle the like status in the media data.
+      //           const existingLikeIndex = draft.like.findIndex(
+      //             (like) => like.userId === user?._id
+      //           );
+
+      //           if (existingLikeIndex !== -1) {
+      //             // Remove the user's like if it exists.
+      //             draft.like.splice(existingLikeIndex, 1);
+      //           } else {
+      //             // Add the user's like if it doesn't exist.
+      //             draft.like.push({
+      //               userId: user?._id,
+      //               userName: user?.userName,
+      //               userImage: user?.userImage,
+      //             });
+      //           }
+      //         }
+      //       )
+      //     );
+      //   } catch {
+      //     //
+      //   }
+      // },
     }),
 
     //   delete media
@@ -124,4 +168,5 @@ export const {
   useDeleteMediaMutation,
   useEditMediaMutation,
   useGetLatestMediasQuery,
+  useToggleLikeMediaMutation,
 } = mediaApi;
