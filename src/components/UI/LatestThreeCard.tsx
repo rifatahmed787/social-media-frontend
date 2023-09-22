@@ -1,5 +1,4 @@
 import { IMedia } from "@/Types/Media";
-import { IUser } from "@/Types/User";
 import { useAppSelector } from "@/hooks/reduxHook";
 import { useEffect, useState } from "react";
 import Image from "next/image";

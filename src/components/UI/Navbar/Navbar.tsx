@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Link from "next/link";
 import { useRouter } from "next/router";
 import logo from "../../../assets/socialink-color.svg";
@@ -12,11 +13,18 @@ const Navbar = () => {
   const router = useRouter();
   const { isLoggedIn } = useAppSelector((state) => state.auth);
   const [isNavbarVisible, setIsNavbarVisible] = useState(true);
+  const [previousScroll, setPreviousScroll] = useState(0);
 
   const handleScroll = () => {
-    const scrollTop = window.scrollY;
+    const currentScroll = window.scrollY;
 
-    setIsNavbarVisible(scrollTop < 1000);
+    if (currentScroll > previousScroll) {
+      setIsNavbarVisible(false);
+    } else {
+      setIsNavbarVisible(true);
+    }
+
+    setPreviousScroll(currentScroll);
   };
 
   useEffect(() => {
@@ -25,7 +33,7 @@ const Navbar = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [handleScroll, previousScroll]);
 
   const navbarClasses = `fixed top-0 z-20 border-b w-full border-gray-200 transition-transform duration-300 ${
     isNavbarVisible ? "translate-y-0" : "-translate-y-full"
