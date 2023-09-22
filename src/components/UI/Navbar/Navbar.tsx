@@ -11,6 +11,7 @@ import { useSession, signOut } from "next-auth/react";
 
 const Navbar = () => {
   const router = useRouter();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isLoggedIn } = useAppSelector((state) => state.auth);
   const [isNavbarVisible, setIsNavbarVisible] = useState(true);
   const [previousScroll, setPreviousScroll] = useState(0);
@@ -35,6 +36,10 @@ const Navbar = () => {
     };
   }, [handleScroll, previousScroll]);
 
+  const toggleMenu = () => {
+    setIsMenuOpen((prevIsMenuOpen) => !prevIsMenuOpen);
+  };
+
   const navbarClasses = `fixed top-0 z-20 border-b w-full border-gray-200 transition-transform duration-300 ${
     isNavbarVisible ? "translate-y-0" : "-translate-y-full"
   } bg-white shadow-md`;
@@ -56,19 +61,19 @@ const Navbar = () => {
               <Link href={"/signup"}>
                 <Button
                   title="Get started"
-                  className="border border-black text-primary hover:bg-primary hover:border-primary hover:text-white duration-300 px-3  py-2 "
+                  className="border border-black text-primary hover:bg-primary hover:border-primary hover:text-white duration-300 px-3 py-2 hidden md:block"
                   icon=""
                 />
               </Link>
             )}
             <button
+              onClick={toggleMenu}
               data-collapse-toggle="navbar-sticky"
               type="button"
               className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
               aria-controls="navbar-sticky"
               aria-expanded="false"
             >
-              <span className="sr-only">Open main menu</span>
               <svg
                 className="w-5 h-5"
                 aria-hidden="true"
@@ -85,6 +90,73 @@ const Navbar = () => {
                 />
               </svg>
             </button>
+            {isMenuOpen && (
+              <div
+                className={`absolute  lg:hidden left-0 w-full bg-gray-300 mt-2 top-16 overflow-y-auto ${
+                  isMenuOpen
+                    ? "dropdown-menu-small"
+                    : "-translate-x-full duration-300"
+                } `}
+              >
+                <div className=" shadow-sm text-brand hover:text-primary">
+                  <nav className="flex justify-center mx-5">
+                    <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
+                      <li>
+                        <Link
+                          href="/"
+                          className={`block py-2 text-center md:p-0 text-gray-900 ${
+                            router.pathname === "/"
+                              ? "bg-blue-700 rounded md:bg-transparent text-gray-50 "
+                              : ""
+                          }`}
+                        >
+                          Home
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/media"
+                          className={`block py-2 text-center md:p-0 text-gray-900 ${
+                            router.pathname === "/media"
+                              ? "bg-blue-700 rounded md:bg-transparent text-gray-50 "
+                              : ""
+                          }`}
+                        >
+                          Media
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/about"
+                          className={`block py-2 text-center md:p-0 text-gray-900 ${
+                            router.pathname === "/about"
+                              ? "bg-blue-700 rounded md:bg-transparent text-gray-50"
+                              : ""
+                          }`}
+                        >
+                          About
+                        </Link>
+                      </li>
+                      <li className="mt-2">
+                        {isLoggedIn ? (
+                          <>
+                            <ul>{<Account />}</ul>
+                          </>
+                        ) : (
+                          <Link href={"/signup"}>
+                            <Button
+                              title="Get started"
+                              className="border border-black text-primary hover:bg-primary hover:border-primary hover:text-white duration-300 px-3  py-2 "
+                              icon=""
+                            />
+                          </Link>
+                        )}
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+            )}
           </div>
 
           <div
