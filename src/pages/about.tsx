@@ -1,4 +1,5 @@
 import RootLayout from "@/components/Layouts/RootLayout";
+import Head from "next/head";
 import { ReactElement } from "react";
 
 const about = () => {
