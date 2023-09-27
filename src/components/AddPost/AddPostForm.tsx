@@ -11,6 +11,7 @@ import { useUploderMutation } from "@/redux/features/upload/uploadApi";
 import { get_error_messages } from "@/lib/error_message";
 import { useAppSelector } from "@/hooks/reduxHook";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 const AddPostForm = () => {
   // user details
@@ -22,8 +23,7 @@ const AddPostForm = () => {
     useAddMediaMutation();
   const [uploader, { isError: uploadError, error: uploadingError }] =
     useUploderMutation();
-
-  console.log(user);
+  const { data: session } = useSession();
 
   // Alert State
   const [isAlertOpen, setIsAlertOpen] = useState(false);
@@ -125,10 +125,12 @@ const AddPostForm = () => {
   });
 
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (isLoggedIn || session?.user?.email) {
+      router.push("/");
+    } else {
       router.push("/signup");
     }
-  }, [isLoggedIn, router]);
+  }, [isLoggedIn, router, session?.user?.email]);
 
   return (
     <div className="flex justify-center bg-box-pattern">

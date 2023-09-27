@@ -15,6 +15,8 @@ const Navbar = () => {
   const { isLoggedIn } = useAppSelector((state) => state.auth);
   const [isNavbarVisible, setIsNavbarVisible] = useState(true);
   const [previousScroll, setPreviousScroll] = useState(0);
+  const { data: session } = useSession();
+  console.log(session);
 
   const handleScroll = () => {
     const currentScroll = window.scrollY;
@@ -53,7 +55,7 @@ const Navbar = () => {
           </Link>
 
           <div className="flex md:order-2">
-            {isLoggedIn ? (
+            {isLoggedIn || session?.user?.email ? (
               <>
                 <ul className=" items-center hidden lg:flex">{<Account />}</ul>
               </>
@@ -138,7 +140,7 @@ const Navbar = () => {
                         </Link>
                       </li>
                       <li className="mt-2">
-                        {isLoggedIn ? (
+                        {isLoggedIn || session?.user?.email ? (
                           <>
                             <ul>{<Account />}</ul>
                           </>

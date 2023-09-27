@@ -8,12 +8,14 @@ import { useToggleLikeMediaMutation } from "@/redux/features/media/mediaApi";
 import ToastContainer from "./Toast";
 import { get_error_messages } from "@/lib/error_message";
 import Button from "./Button";
+import { useSession } from "next-auth/react";
 
 const LatestThreeCard = ({ media }: { media: IMedia }) => {
   const { user } = useAppSelector((state) => state.auth);
   const [likePost, setLikePost] = useState(false);
   const [toggleLikeMedia, { data: like_data, isError, error, isSuccess }] =
     useToggleLikeMediaMutation();
+  const { data: session } = useSession();
   // console.log(likePost);
 
   // Alert State
@@ -25,12 +27,19 @@ const LatestThreeCard = ({ media }: { media: IMedia }) => {
 
   const handleLike = async () => {
     if (!media) {
-      // Handle the case where media is undefined.
       return;
     }
 
     try {
-      await toggleLikeMedia({ mediaID: media._id, user });
+      if (session?.user?.email) {
+        await toggleLikeMedia({
+          mediaID: media._id,
+          user: session?.user.email,
+        });
+      } else {
+        // User has custom login
+        await toggleLikeMedia({ mediaID: media._id, user });
+      }
     } catch (error) {
       console.error("Error toggling like:", error);
     }
@@ -101,7 +110,7 @@ const LatestThreeCard = ({ media }: { media: IMedia }) => {
         <div className="p-3">
           <div className="flex items-center justify-between">
             <div className="flex justify-center items-center space-x-3">
-              {user?._id || user?.email ? (
+              {user?._id || session?.user?.email ? (
                 <button
                   type="button"
                   title="Like post"

@@ -17,18 +17,19 @@ type AppPropsWithLayout = AppProps & {
 
 export default function MyApp({
   Component,
-  pageProps: { session, ...pageProps },
+  pageProps: { ...pageProps },
 }: AppPropsWithLayout) {
   // Use the layout defined at the page level, if available
   const getLayout = Component.getLayout ?? ((page) => page);
-
-  return getLayout(
-    <SessionProvider session={session}>
-      <CookiesProvider>
-        <Provider store={store}>
-          <Component {...pageProps} />
-        </Provider>
-      </CookiesProvider>
+  return (
+    <SessionProvider session={pageProps.session}>
+      {getLayout(
+        <CookiesProvider>
+          <Provider store={store}>
+            <Component {...pageProps} />
+          </Provider>
+        </CookiesProvider>
+      )}
     </SessionProvider>
   );
 }
