@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import MediaInfo from "../UI/MediaInfo";
 import { useRouter } from "next/router";
-import Link from "next/link";
 
 const FullMediaDetails = () => {
   const router = useRouter();
